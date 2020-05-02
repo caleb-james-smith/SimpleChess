@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="600"
+style="border:10px solid #6f828a;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+var side = 75;
+var nSquares = 8;
+var light = "#fbeeac";
+var dark  = "#7f5f00";
+
+for (var x = 0; x < nSquares; x++)
+{
+  for (var y = 0; y < nSquares; y++)
+  {
+    var parity = (x + y) % 2
+    // odd
+    if (parity)
+    {
+      ctx.fillStyle = dark;
+    }
+    // even
+    else
+    {
+      ctx.fillStyle = light;
+    }
+  // fillRect( x, y, width, height )
+  ctx.fillRect(x*side,y*side,side,side);  
+  }
+}
+
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="600"
+style="border:10px solid #6f828a;">
+Your browser does not support the canvas element.
+</canvas>
+
+<script>
+
+// fill circle
+function fillCircle(ctx, x, y, radius, color)
+{
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  // void ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise]);
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
+  ctx.fill();
+}
+
+// draw pieces
+function drawPieces(ctx, position, color, side)
+{
+  for (const pos of position)
+  {
+    var x = side * (0.5 + pos[0]);
+    var y = side * (0.5 + pos[1]);
+    // function fillCircle(ctx, x, y, radius, color)
+    fillCircle(ctx, x, y, 0.4 * side, color);
+  }
+}
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+
+var side = 75;
+var nSquares = 8;
+var light = "#fbeeac";
+var dark  = "#7f5f00";
+
+// draw board
+for (var x = 0; x < nSquares; x++)
+{
+  for (var y = 0; y < nSquares; y++)
+  {
+    var parity = (x + y) % 2;
+    // odd
+    if (parity)
+    {
+      ctx.fillStyle = dark;
+    }
+    // even
+    else
+    {
+      ctx.fillStyle = light;
+    }
+  // fillRect( x, y, width, height )
+  ctx.fillRect(x*side,y*side,side,side);  
+  }
+}
+
+var p1_color = "#fefefe";
+var p2_color = "#222222";
+var p1_position = [];
+var p2_position = [];
+
+// starting positions
+
+for (var x = 0; x < nSquares; x++)
+{
+  for (var y = 6; y < 8; y++)
+  {
+    p1_position.push([x,y]);
+  }
+  for (var y = 0; y < 2; y++)
+  {
+    p2_position.push([x,y]);
+  }
+}
+
+// drawPieces(ctx, position, color, side)
+drawPieces(ctx, p1_position, p1_color, side);
+drawPieces(ctx, p2_position, p2_color, side);
+
+</script>
+
+</body>
+</html>
+
